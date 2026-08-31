@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "258895781575",
+    "project_id": "chaire-app",
+    "storage_bucket": "chaire-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258895781575:android:790346cace9ba270ca68e2",
+        "android_client_info": {
+          "package_name": "com.lachaire_ECC.ma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258895781575-9jm32fq8gp3h36hip7bfuoldlu6f42at.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDac3bb6cvlWkoSxp15fVJwrvqNlR1O4wc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258895781575-9jm32fq8gp3h36hip7bfuoldlu6f42at.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
