@@ -1,7 +1,5 @@
 name: Build APK
 
-# Se déclenche à chaque envoi (push) sur la branche principale, ou manuellement
-# depuis l'onglet "Actions" du dépôt GitHub.
 on:
   push:
     branches: [main, master]
@@ -14,7 +12,7 @@ jobs:
       - name: Récupérer le code
         uses: actions/checkout@v4
 
-      - name: Installer Java (nécessaire pour compiler Android)
+      - name: Installer Java
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -25,6 +23,17 @@ jobs:
         with:
           flutter-version: '3.19.0'
           channel: 'stable'
+
+      # ÉTAPE AJOUTÉE : Injection automatique du namespace si manquant dans build.gradle
+      - name: Fix Namespace in build.gradle
+        run: |
+          BUILD_GRADLE="android/app/build.gradle"
+          if [ -f "$BUILD_GRADLE" ]; then
+            if ! grep -q "namespace" "$BUILD_GRADLE"; then
+              echo "Ajout du namespace dans $BUILD_GRADLE..."
+              sed -i '/android {/a \    namespace "com.example.chaire"' "$BUILD_GRADLE"
+            fi
+          fi
 
       - name: Installer les dépendances du projet
         run: flutter pub get
