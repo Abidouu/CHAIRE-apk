@@ -24,14 +24,21 @@ jobs:
           flutter-version: '3.19.0'
           channel: 'stable'
 
-      # ÉTAPE AJOUTÉE : Injection automatique du namespace si manquant dans build.gradle
+      # Fix 1: Remove package attribute from AndroidManifest.xml
+      - name: Clean package attribute in AndroidManifest.xml
+        run: |
+          MANIFEST="android/app/src/main/AndroidManifest.xml"
+          if [ -f "$MANIFEST" ]; then
+            sed -i 's/package="[^\"]*"//g' "$MANIFEST"
+          fi
+
+      # Fix 2: Inject correct namespace into build.gradle
       - name: Fix Namespace in build.gradle
         run: |
           BUILD_GRADLE="android/app/build.gradle"
           if [ -f "$BUILD_GRADLE" ]; then
             if ! grep -q "namespace" "$BUILD_GRADLE"; then
-              echo "Ajout du namespace dans $BUILD_GRADLE..."
-              sed -i '/android {/a \    namespace "com.example.chaire"' "$BUILD_GRADLE"
+              sed -i '/android {/a \    namespace "com.example.cci_app"' "$BUILD_GRADLE"
             fi
           fi
 
